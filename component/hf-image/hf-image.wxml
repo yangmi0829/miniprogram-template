@@ -1,0 +1,11 @@
+<image 
+class="customer-class"
+src="{{src}}" 
+mode="{{mode}}" 
+webp="{{webp}}" 
+lazy-load="{{lazy-load}}" 
+show-menu-by-longpress="{{show-menu-by-longpress}}" 
+binderror="binderror"
+bindload="bindload"
+>
+</image>

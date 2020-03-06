@@ -1,0 +1,3 @@
+<view  wx:for="{{imgs}}" wx:key="index">
+  {{item.desc}}:<hf-image customer-class='hf-img' src="{{item.src}}" ></hf-image>
+</view>

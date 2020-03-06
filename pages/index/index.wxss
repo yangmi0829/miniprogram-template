@@ -1,0 +1,14 @@
+.container{
+  width: 750rpx;
+  height: 100vh;
+  display: flex;
+}
+
+.grid-container{
+ margin: auto;
+ width: 100%;
+}
+
+.grid{
+  margin: auto;
+}

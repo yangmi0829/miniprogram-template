@@ -1,0 +1,7 @@
+<view class="container">
+    <view class="grid-container">
+        <van-grid class="grid">
+            <van-grid-item wx:for="{{list}}" wx:key="index" text="{{item.text}}" url="{{item.url}}"/>
+        </van-grid>
+    </view>
+</view>

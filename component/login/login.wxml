@@ -1,0 +1,4 @@
+<!--component/login/login.wxml-->
+<button open-type="getPhoneNumber" bindgetphonenumber="getphonenumber">
+  <slot></slot>
+</button>

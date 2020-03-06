@@ -1,0 +1,7 @@
+<view bindtap="upload">上传图片</view>
+<view>原图大小:{{sourceSize}}</view>
+<view>压缩后大小:{{compressSize}}</view>
+<image src="{{src}}"></image>
+<canvas canvas-id="canvas" 
+style="position:absulote;left:-9999rpx;width:{{width}}px;height:{{height}}px">
+</canvas>

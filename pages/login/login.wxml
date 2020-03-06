@@ -1,0 +1,4 @@
+<!--pages/login/login.wxml-->
+<login bindlogin="login">
+  登录
+</login>

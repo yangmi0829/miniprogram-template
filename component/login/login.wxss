@@ -1,0 +1,11 @@
+/* component/login/login.wxss */
+button{
+  background-color: unset;
+  padding: 0;
+  border-radius: 0;
+  text-align: unset;
+  line-height: unset;
+}
+button::after{
+  content: unset;
+}

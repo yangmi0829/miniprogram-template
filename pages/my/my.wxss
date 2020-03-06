@@ -1,0 +1,36 @@
+:host{
+  --avatar-size:124rpx;
+}
+.userinfo-container{
+  display: flex;
+  background-color: white;
+  padding: 20rpx 40rpx;
+}
+
+.userinfo-container .userinfo-avatar{
+  border-radius: 50%;
+  overflow: hidden;
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  margin-right: 40rpx;
+  box-shadow: 2rpx 6rpx 10rpx #999999;
+}
+
+.userinfo-container .userinfo-text{
+  flex: 1;
+  font-size: 24rpx;
+  font-weight: bold;
+  line-height: 62rpx;
+}
+
+.userinfo-phone{
+
+}
+
+.link-container{
+  margin: 20rpx 0;
+}
+
+.logout-container{
+  font-weight: bold;
+}

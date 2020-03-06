@@ -1,0 +1,4 @@
+<!--pages/api/api.wxml-->
+<button bindtap="send">发送请求:</button>
+<view>返回数据:</view>
+{{content}}

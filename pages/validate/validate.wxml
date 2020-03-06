@@ -1,0 +1,12 @@
+<view>
+<input placeholder="姓名" data-key="name" bindblur="handleInput"/>
+<input placeholder="电话号码" data-key="mobile" bindblur="handleInput"/>
+<input placeholder="身份证" data-key="idcard" bindblur="handleInput"/>
+    <button bindtap="submit">校验</button>
+</view>
+<view>错误信息:</view>
+<view wx:for="{{errorList}}" wx:key="index">
+key:{{item.key}}
+message:{{item.message}}
+value: {{item.value}}
+</view>
