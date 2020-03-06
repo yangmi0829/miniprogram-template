@@ -19,7 +19,7 @@ class WxValidate {
   __initDefaultsRegex(){
     this.defaultsRegex = {
       tel:/^1\d{10}$/,
-      idcard:/^$/,
+      idcard:/^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/,
     }
   }
   __initDefaultsMessage(){
@@ -85,6 +85,7 @@ class WxValidate {
       this.errorList.push({key, message, value: val})
     }
   }
+
   addValidateMethod(key, fn){
     if(this.defaultsValidate[key])throw new Error('此校验方法已存在')
     this.defaultsValidate[key] = fn
@@ -109,4 +110,5 @@ class WxValidate {
     return fn(val)
   }
 }
+
 module.exports = WxValidate

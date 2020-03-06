@@ -3,6 +3,7 @@ const env = 'pro'
 
 const urlMap = new Map()
 
+// todo 设置请求url
 switch (env) {
     case 'dev':
         urlMap.set('baseURL', '')

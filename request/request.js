@@ -1,13 +1,12 @@
 import WxRequest from './WxRequest'
 import {baseURL} from '../environment/config'
-console.log("baseURL:", baseURL)
 const request = new WxRequest({
     baseURL
 })
 // 请求拦截器
 request.interceptors.request = {
     success(config){
-        // todo token
+        // todo 请求头携带token
         return config
     },
     error(e){
