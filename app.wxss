@@ -1,4 +1,4 @@
 page{
   background-color: #F7F7F7;
-  position: relative;
+  --primary:#0A49F4;
 }

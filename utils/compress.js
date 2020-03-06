@@ -1,26 +1,3 @@
-/**
- * 使用示例
- * chooseImage: function (e) {
-    var that = this;
-    wx.chooseImage({
-      success: result => {
-        console.log('原图大小', result.tempFiles[0].size)
-          getCompressImgPath(result.tempFilePaths[0], {}, that)
-            .then(path => {
-              that.setData({
-                src: path
-              })
-              wx.getFileInfo({
-                filePath: path,
-                success(res) {
-                  console.log('压缩后图片大小:', res.size)
-                }
-              })
-            })
-      }
-    })
-  }
- */
 function getCompressImgPath(src, options, context, canvasId = 'canvas' ) {
   const { quality, percent} = Object.assign({ quality: 0.8, percent:0.5}, options)
   return new Promise(resolve => {
@@ -32,7 +9,7 @@ function getCompressImgPath(src, options, context, canvasId = 'canvas' ) {
           ctx.drawImage(src, 0, 0, width, height);
           ctx.draw(false, function () {
             wx.canvasToTempFilePath({
-              canvasId: canvasId,
+              canvasId,
               fileType: 'jpg',
               quality: quality,
               destWidth: width * percent,
