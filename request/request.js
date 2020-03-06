@@ -1,6 +1,8 @@
 import WxRequest from './WxRequest'
+import {baseURL} from '../environment/config'
+console.log("baseURL:", baseURL)
 const request = new WxRequest({
-    baseURL: ''
+    baseURL
 })
 // 请求拦截器
 request.interceptors.request = {
