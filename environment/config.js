@@ -6,7 +6,7 @@ const urlMap = new Map()
 // todo 设置请求url
 switch (env) {
     case 'dev':
-    urlMap.set('baseURL', 'http://localhost:3000')
+    urlMap.set('baseURL', '')
         break;
     case 'pro':
         urlMap.set('baseURL', '')

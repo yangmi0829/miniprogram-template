@@ -20,5 +20,10 @@ Page({
             content:res
           })
         })
+        .catch(e => {
+          this.setData({
+            content: e
+          })
+        })
   }
 })
