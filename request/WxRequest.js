@@ -50,14 +50,29 @@ class WxRequest {
         const _this = this
         const { baseURL } = config
         config = Object.assign({}, config, { url: baseURL + url })
-        config = this.interceptors.__handleReqInterceptors(config)
-        return new Promise((resolve, reject) => {
-            wx.request({
-                ...config,
-                success(res){resolve(_this.interceptors.__handleRespInterceptors(res))},
-                fail(e){reject(e)},
+        return this.interceptors.__handleReqInterceptors(config)
+          .then(result => {
+            return new Promise((resolve, reject) => {
+              wx.request({
+                ...result,
+                success(res) {
+                  try {
+                    _this.interceptors.__handleRespInterceptors(res)
+                      .then(res => {
+                        resolve(res)
+                      })
+                      .catch(e => {
+                        reject(e)
+                      })
+                  } catch (e) {
+                    reject(e)
+                  }
+                },
+                fail(e) { reject(e) },
+              })
             })
-        })
+          })
+        
     }
 
 }

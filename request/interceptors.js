@@ -20,19 +20,25 @@ class Interceptors{
     }
 
     __handleRespInterceptors(response){
-        return this.__handleInterceptors('response', response)
+      return this.__handleInterceptors('response', response)
     }
 
     __handleInterceptors(key, data){
-        if(this[key].success){
-            try {
-                data = this[key].success(data)
-            }catch (e) {
-                this[key].error(e)
-                throw new Error(e)
-            }
+      const __this = this
+      return new Promise((resolve, reject) => {
+        if (__this[key].success) {
+          __this[key].success(data)
+            .then(res => {
+              resolve(res)
+            })
+            .catch(e => {
+              __this[key].error(e)
+              reject(e)
+            })
+        }else{
+          resolve(data)
         }
-        return data
+      })   
     }
 }
 
