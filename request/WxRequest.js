@@ -1,4 +1,6 @@
 import Interceptors from './interceptors'
+import logger from './slf4j'
+
 class WxRequest {
     constructor(options){
         this.options = options
@@ -27,6 +29,7 @@ class WxRequest {
                 'dataType': 'json',
                 'responseType': 'text',
                 'timeout': 10 * 1000,
+                'header': {}
             }
         }
         this.options = Object.assign({}, defaultOptions, this.options)
@@ -41,7 +44,7 @@ class WxRequest {
         ]
         methods.forEach(method => {
             this[method.toLowerCase()] = (url,config) => {
-                config = Object.assign({header: {}}, this.options, config,{method})
+                config = Object.assign({}, this.options, config,{method})
                 return this.__request(url,config)
             }
         })
@@ -60,7 +63,7 @@ class WxRequest {
                 try {
                     __this.interceptors.__handleReqCompleteInterceptors(options)
                 }catch (e) {
-                    console.error("调用__handleReqCompleteInterceptors异常:", e)
+                    logger.error("调用__handleReqCompleteInterceptors异常:", e)
                 }finally {
                     wx.uploadFile({
                         ...options,
@@ -71,7 +74,7 @@ class WxRequest {
                                     try {
                                         __this.interceptors.__handleRespCompleteInterceptors(r)
                                     }catch (e) {
-                                        console.error("调用__handleRespCompleteInterceptors异常:", e)
+                                        logger.error("调用__handleRespCompleteInterceptors异常:", e)
                                     }finally {
                                         resolve(r)
                                     }
@@ -80,7 +83,7 @@ class WxRequest {
                                     try {
                                         __this.interceptors.__handleRespCompleteInterceptors(err)
                                     }catch (e) {
-                                        console.error("调用__handleRespCompleteInterceptors异常:", e)
+                                        logger.error("调用__handleRespCompleteInterceptors异常:", e)
                                     }finally {
                                         reject(err)
                                     }
@@ -92,12 +95,11 @@ class WxRequest {
                     })
                 }
 
-
             }).catch(e => {
               try {
                   __this.interceptors.__handleReqCompleteInterceptors(e)
               }catch (e) {
-                  console.error("调用__handleReqCompleteInterceptors异常:", e)
+                  logger.error("调用__handleReqCompleteInterceptors异常:", e)
               }
           })
         })
@@ -122,7 +124,7 @@ class WxRequest {
               try {
                   __this.interceptors.__handleReqCompleteInterceptors(result)
               }catch (e) {
-                  console.error("调用__handleReqCompleteInterceptors异常:", e)
+                  logger.error("调用__handleReqCompleteInterceptors异常:", e)
               }finally {
                   return new Promise((resolve, reject) => {
                       wx.request({
@@ -134,7 +136,7 @@ class WxRequest {
                                           try {
                                               __this.interceptors.__handleRespCompleteInterceptors(res)
                                           }catch (e) {
-                                              console.error("调用__handleRespCompleteInterceptors异常:", e)
+                                              logger.error("调用__handleRespCompleteInterceptors异常:", e)
                                           }finally {
                                               resolve(res)
                                           }
@@ -144,7 +146,7 @@ class WxRequest {
                                           try {
                                               __this.interceptors.__handleRespCompleteInterceptors(e)
                                           }catch (e) {
-                                              console.error("调用__handleRespCompleteInterceptors异常:", e)
+                                              logger.error("调用__handleRespCompleteInterceptors异常:", e)
                                           }finally {
                                               reject(e)
                                           }
@@ -161,7 +163,7 @@ class WxRequest {
                 try {
                     __this.interceptors.__handleReqCompleteInterceptors(err)
                 }catch (e) {
-                    console.error("调用__handleReqCompleteInterceptors异常:", e)
+                    logger.error("调用__handleReqCompleteInterceptors异常:", e)
                 }finally {
                     return Promise.reject(err);
                 }
