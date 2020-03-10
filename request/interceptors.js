@@ -24,22 +24,33 @@ class Interceptors{
       return this.__handleInterceptors('response', response)
     }
 
-    __handleInterceptors(key, data){
+    __handleReqCompleteInterceptors(config){
+        return this.__handleInterceptors('request', config, 'complete')
+    }
+
+    __handleRespCompleteInterceptors(response){
+        return this.__handleInterceptors('response', response, 'complete')
+    }
+
+
+    __handleInterceptors(key, data, type){
       const __this = this
       return new Promise((resolve, reject) => {
-        if (__this[key].success) {
-          __this[key].success(data)
-            .then(res => {
-              resolve(res)
-            })
-            .catch(e => {
-              __this[key].error(e)
-              reject(e)
-            })
+          if(type === 'complete'){
+              resolve(__this[key].complete(data))
+          }else if (__this[key].success) {
+              __this[key].success(data)
+                .then(res => {
+                  resolve(res)
+                })
+                .catch(e => {
+                  __this[key].error(e)
+                  reject(e)
+                })
         }else{
           resolve(data)
         }
-      })   
+      })
     }
 }
 
