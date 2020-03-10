@@ -108,7 +108,11 @@ class WxRequest {
     }
 
     addMethods(key,methods){
-      this[key] = methods
+        if(this[key]){
+            logger.error('此方法已存在!',key)
+            return
+        }
+        this[key] = methods
     }
 
     __initInterceptors(){
@@ -159,7 +163,8 @@ class WxRequest {
                       })
                   })
               }
-          }).catch(err => {
+          })
+          .catch(err => {
                 try {
                     __this.interceptors.__handleReqCompleteInterceptors(err)
                 }catch (e) {
