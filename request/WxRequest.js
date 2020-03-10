@@ -8,10 +8,15 @@ class WxRequest {
     __init(){
         // 初始化基本配置
         this.__initOptions()
-        // 初始化restful请求
-        this.__initMethods()
+        
         // 初始化拦截器
         this.__initInterceptors()
+
+        // 初始化restful请求
+        this.__initMethods()
+
+        //初始化扩展方法: 上传
+        this.__initUploadMethods()
     }
 
     __initOptions(){
@@ -36,10 +41,44 @@ class WxRequest {
         ]
         methods.forEach(method => {
             this[method.toLowerCase()] = (url,config) => {
-                config = Object.assign({}, this.options, config,{method})
+                config = Object.assign({header: {}}, this.options, config,{method})
                 return this.__request(url,config)
             }
         })
+    }
+
+    __initUploadMethods(){
+      const __this = this
+      const key = 'upload'
+      const fn = (options) => {
+        return new Promise((resolve,reject) => {
+          const { baseURL } = __this.options
+          const { url } = options
+          options = Object.assign({ header: {} }, options, { url: baseURL + url })
+          __this.interceptors.__handleReqInterceptors(options)
+            .then(option => {
+              wx.uploadFile({
+                ...options,
+                success(res) {
+                  res = { ...res, data: JSON.parse(res.data) }
+                  __this.interceptors.__handleRespInterceptors(res)
+                    .then(r => {
+                      resolve(r)
+                    })
+                    .catch(err => reject(err))
+                },
+                fail(e) {
+                  reject(e)
+                }
+              })
+            })
+        })
+      }
+      this.addMethods(key, fn)
+    }
+
+    addMethods(key,methods){
+      this[key] = methods
     }
 
     __initInterceptors(){
@@ -71,6 +110,8 @@ class WxRequest {
                 fail(e) { reject(e) },
               })
             })
+          }).catch(err => {
+            return Promise.reject(err);
           })
         
     }

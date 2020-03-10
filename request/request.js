@@ -8,21 +8,31 @@ const request = new WxRequest({
 request.interceptors.request = {
     success(config){
         // todo 请求头携带token
+      config.header.auth = 'test'
       return Promise.resolve(config)
     },
     error(e){
         return Promise.reject(e)
-    }
+    },
+    complete(e) {
+      wx.showLoading({
+        title: '加载中',
+        icon: 'none'
+      })
+    },
 }
 // 响应拦截器
 request.interceptors.response = {
-    success(response){  
+    success(response){
         if( response.statusCode == 200 && response.data.code == RESPONCE_CODE_ENUM.SUCCESS){
           return Promise.resolve(response.data)
         }
       return Promise.reject(response.data)
     },
-    error(e){}
+    error(e){},
+    complete(e){
+      wx.hideLoading()
+    }
 }
 
 module.exports = request

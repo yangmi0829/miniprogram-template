@@ -14,16 +14,12 @@ Page({
   onLoad: function (options) {
   },
   send(){
-    API.test('https://www.baidu.com/')
+    API.test()
         .then(res => {
           this.setData({
-            content:res
+            content:JSON.stringify(res)
           })
         })
-        .catch(e => {
-          this.setData({
-            content: e
-          })
-        })
+
   }
 })

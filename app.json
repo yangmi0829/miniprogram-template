@@ -6,6 +6,7 @@
     "pages/api/api",
     "pages/dateformat/dateformat",
     "pages/compress/compress",
+    "pages/upload/upload",
     "pages/my/my",
     "pages/login/login"
   ],

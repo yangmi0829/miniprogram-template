@@ -12,6 +12,7 @@ class Interceptors{
         return {
             success(data){return data},
             error(error){return error},
+            complete(data) { return data},
         }
     }
 

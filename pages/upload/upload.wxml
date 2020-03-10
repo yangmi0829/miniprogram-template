@@ -1,0 +1,1 @@
+<view bindtap="chooseImg">上传图片</view>

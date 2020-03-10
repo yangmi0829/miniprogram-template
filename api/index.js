@@ -15,8 +15,16 @@ const __API = {
     }
 }
 const API = {
-    test(url){
-        return request.get(url)
+    test(){
+        return request.get('/test')
+    },
+    upload(filePath){
+      const options = {
+        url: '/upload',
+        filePath,
+        name: 'file'
+      }
+      return request.upload(options)
     },
     login(data){
         // return request.get('/login', data)
