@@ -4,6 +4,7 @@ import {RESPONCE_CODE_ENUM} from '../constants/responceCode'
 const request = new WxRequest({
     baseURL
 })
+let error = null
 // 请求拦截器
 request.interceptors.request = {
     success(config){
@@ -15,10 +16,7 @@ request.interceptors.request = {
         return Promise.reject(e)
     },
     complete(e) {
-      wx.showLoading({
-        title: '加载中',
-        icon: 'none'
-      })
+      wx.showLoading()
     },
 }
 // 响应拦截器
@@ -29,9 +27,15 @@ request.interceptors.response = {
         }
       return Promise.reject(response.data)
     },
-    error(e){},
+    error(e){
+        error = e
+    },
     complete(e){
-      wx.hideLoading()
+        wx.hideLoading()
+        error && wx.showToast({
+            title: error,
+            icon: 'none',
+        })
     }
 }
 

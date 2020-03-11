@@ -164,15 +164,6 @@ class WxRequest {
                   })
               }
           })
-          .catch(err => {
-                try {
-                    __this.interceptors.__handleReqCompleteInterceptors(err)
-                }catch (e) {
-                    logger.error("调用__handleReqCompleteInterceptors异常:", e)
-                }finally {
-                    return Promise.reject(err);
-                }
-          })
     }
 }
 
