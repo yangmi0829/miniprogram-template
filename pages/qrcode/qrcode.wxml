@@ -1,0 +1,3 @@
+<input placeholder="请输入内容" onchange="handleInput"></input>
+<button bindtap="genQRCode">生成二维码</button>
+<canvas class='canvas' canvas-id='canvas' bindlongtap='save'></canvas>

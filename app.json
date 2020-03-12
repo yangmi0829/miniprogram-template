@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/qrcode/qrcode",
     "pages/image/image",
     "pages/validate/validate",
     "pages/api/api",
