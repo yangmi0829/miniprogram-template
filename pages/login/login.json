@@ -1,6 +1,6 @@
 {
   "navigationBarTitleText": "登录",
   "usingComponents": {
-    "login": "/component/login/login"
+    "login": "/components/login/login"
   }
 }

@@ -13,7 +13,7 @@
   width: var(--avatar-size);
   height: var(--avatar-size);
   margin-right: 40rpx;
-  box-shadow: 2rpx 6rpx 10rpx #999999;
+  box-shadow: 6rpx 6rpx 20rpx #999999;
 }
 
 .userinfo-container .userinfo-text{
