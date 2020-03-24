@@ -18,9 +18,7 @@ Page({
     this.data.html = e.detail.value
   },
   parser(){
-    this.setData({
-      html: this.data.html
-    })
+    this.selectComponent("#parser").setContent(this.data.html);
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

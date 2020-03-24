@@ -1,4 +1,4 @@
-html:<textarea value="{{html}}" bindinput='handleInput'></textarea>
+html:<textarea value="{{html}}" maxlength="-1" bindinput='handleInput'></textarea>
 <button bindtap="parser">解析</button>
 解析结果:
-<parser html="{{html}}" />
+<parser html="{{html}}" id="parser" />
