@@ -9,5 +9,6 @@
 6.类微信我的界面
 7.登陆页面获取code，iv，encryptedData
 8.XHR扩展upload上传图片
+9.富文本解析器
 ```
 
