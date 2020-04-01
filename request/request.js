@@ -22,6 +22,7 @@ request.interceptors.request = {
 // 响应拦截器
 request.interceptors.response = {
     success(response){
+      debugger
         if( response.statusCode == 200 && response.data.code == RESPONCE_CODE_ENUM.SUCCESS){
           return Promise.resolve(response.data)
         }

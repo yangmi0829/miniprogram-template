@@ -122,7 +122,7 @@ class WxRequest {
     __request(url,config){
         const __this = this
         const { baseURL } = config
-        config = Object.assign({}, config, { url: baseURL + url })
+        config = Object.assign({}, config, {url})
         return this.interceptors.__handleReqInterceptors(config)
           .then(result => {
               try {
@@ -133,7 +133,9 @@ class WxRequest {
                   return new Promise((resolve, reject) => {
                       wx.request({
                           ...result,
+                          url: baseURL + url,
                           success(res) {
+                            res.config = config
                               try {
                                   __this.interceptors.__handleRespInterceptors(res)
                                       .then(res => {
