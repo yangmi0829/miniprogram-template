@@ -1,6 +1,6 @@
 import Interceptors from './interceptors'
 import logger from './slf4j'
-import { buildFullPath} from './helper.js'
+import { buildFullPath } from './helper.js'
 
 class WxRequest {
     constructor(options){
@@ -10,7 +10,7 @@ class WxRequest {
     static create(options){
       const instance = new WxRequest(options)
       const fn = function (options) {
-        return this.__request(options.url, options)
+        return this.__request(options)
       }.bind(instance)
       fn.__proto__ = instance
       return fn
@@ -52,8 +52,8 @@ class WxRequest {
         ]
         methods.forEach(method => {
             this[method.toLowerCase()] = (url,config) => {
-                config = Object.assign({}, this.options, config,{method})
-                return this.__request(url,config)
+                config = Object.assign({header:{}, method, url}, this.options, config)
+                return this.__request(config)
             }
         })
     }
@@ -65,7 +65,7 @@ class WxRequest {
         return new Promise((resolve,reject) => {
           const { baseURL } = __this.options
           const { url } = options
-          options = Object.assign({ header: {} }, options, { url })
+          options = Object.assign({ header: {} }, options)
           __this.interceptors.__handleReqInterceptors(options)
             .then(options => {
                 try {
@@ -103,6 +103,7 @@ class WxRequest {
       }
       this.addMethods(key, fn)
     }
+
     __handleFail(e, reject){
         try {
             this.interceptors.__handleReqErrorInterceptors(e)
@@ -112,6 +113,7 @@ class WxRequest {
             reject(e)
         }
     }
+
     __handleComplete(e){
         wx.nextTick(_ => {
             try {
@@ -133,10 +135,9 @@ class WxRequest {
         this.interceptors = new Interceptors
     }
 
-    __request(url,config){
+    __request(config){
         const __this = this
-        const { baseURL } = config
-        config = Object.assign({header: {}, url}, config)
+        const { baseURL, url } = config
         return this.interceptors.__handleReqInterceptors(config)
           .then(result => {
               try {

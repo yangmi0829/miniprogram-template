@@ -41,18 +41,4 @@ request.interceptors.response = {
     }
 }
 
-
-/*request({
-    url: 'https://www.baidu.com'
-}).then(res => {
-    console.log('then', res)
-}).catch(e => {
-    console.warn('catch',e)
-})
-request.get('https://www.baidu.com')
-    .then(res => {
-        console.log('then', res)
-    }).catch(e => {
-    console.warn('catch',e)
-})*/
 module.exports = request
