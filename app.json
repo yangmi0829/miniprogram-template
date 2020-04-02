@@ -1,11 +1,11 @@
 {
   "pages": [
+    "pages/api/api",
     "pages/index/index",
     "pages/password-input/password-input",
     "pages/qrcode/qrcode",
     "pages/image/image",
     "pages/validate/validate",
-    "pages/api/api",
     "pages/rich-text/rich-text",
     "pages/dateformat/dateformat",
     "pages/compress/compress",

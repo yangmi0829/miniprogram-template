@@ -10,9 +10,9 @@ class Interceptors{
 
     getDefaultInterceptors(){
         return {
-            success(data){return data},
-            error(error){return error},
-            complete(data) { return data},
+          success(data) { return Promise.resolve(data)},
+          error(error) { return Promise.reject(error)},
+          complete(data) { return Promise.resolve(data)},
         }
     }
 
@@ -22,6 +22,15 @@ class Interceptors{
 
     __handleRespInterceptors(response){
       return this.__handleInterceptors('response', response)
+    }
+
+
+    __handleReqErrorInterceptors(config){
+        return this.__handleInterceptors('request', config, 'error')
+    }
+
+    __handleRespErrorInterceptors(response){
+        return this.__handleInterceptors('response', response, 'error')
     }
 
     __handleReqCompleteInterceptors(config){
