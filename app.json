@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/password-input/password-input",
     "pages/qrcode/qrcode",
     "pages/image/image",
     "pages/validate/validate",

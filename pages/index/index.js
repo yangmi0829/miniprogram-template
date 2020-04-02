@@ -9,6 +9,7 @@ Page({
       { text: '图片压缩', url:'/pages/compress/compress'},
       { text: '图片上传', url:'/pages/upload/upload'},
       { text: '图片组件', url:'/pages/image/image'},
+      { text: '密码输入框', url:'/pages/password-input/password-input'},
     ]
   },
   onLoad: function () {
