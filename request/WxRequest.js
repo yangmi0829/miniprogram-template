@@ -78,9 +78,8 @@ class WxRequest {
                             res = { ...res, data: JSON.parse(res.data) }
                             res.config = options
                             __this.interceptors.__handleRespInterceptors(res)
-                                .then(r => {
-                                    resolve(r)
-                                })
+                                .then(resolve)
+                                .catch(reject)
                         },
                         fail(e) {
                             __this.__handleFail.call(__this, e, reject)
