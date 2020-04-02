@@ -31,14 +31,12 @@ class WxRequest {
 
     __initOptions(){
         const defaultOptions = {
-            header: {
-                'content-type': 'application/json',
-                'method': 'GET',
-                'dataType': 'json',
-                'responseType': 'text',
-                'timeout': 10 * 1000,
-                'header': {}
-            }
+            'content-type': 'application/json',
+            'method': 'GET',
+            'dataType': 'json',
+            'responseType': 'text',
+            'timeout': 10 * 1000,
+            'header': {}
         }
         this.options = Object.assign({}, defaultOptions, this.options)
     }
@@ -52,7 +50,7 @@ class WxRequest {
         ]
         methods.forEach(method => {
             this[method.toLowerCase()] = (url,config) => {
-                config = Object.assign({header:{}, method, url}, this.options, config)
+                config = Object.assign({url}, config )
                 return this.__request(config)
             }
         })
@@ -106,7 +104,7 @@ class WxRequest {
 
     __handleFail(e, reject){
         try {
-            this.interceptors.__handleReqErrorInterceptors(e)
+            this.interceptors.__handleRespErrorInterceptors(e)
         }catch (e) {
             logger.error("调用__handleRespErrorInterceptors异常:", e)
         }finally {
@@ -137,6 +135,7 @@ class WxRequest {
 
     __request(config){
         const __this = this
+        config = Object.assign({}, this.options, config)
         const { baseURL, url } = config
         return this.interceptors.__handleReqInterceptors(config)
           .then(result => {
